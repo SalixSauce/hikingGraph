@@ -135,6 +135,22 @@ function findNeighbors(node, matrix) {
 
 function pathTraversal(node, matrix, visited, peak) {
   // Your code here
+  let queue = [node];
+  visited.add(`${node}`)
+
+  while(queue.length) {
+    let curr = queue.shift()
+    for(const neighbor of findNeighbors(curr, matrix)) {
+      let [row, col] = neighbor;
+      if(matrix[row][col] === peak) {
+        return true
+      } else if(!visited.has(`${neighbor}`)) {
+        visited.add(`${neighbor}`)
+        queue.push(neighbor)
+      }
+    }
+  }
+  return false
 }
 
 function identifyPath(mountain) {
