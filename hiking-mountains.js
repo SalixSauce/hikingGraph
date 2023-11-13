@@ -155,8 +155,17 @@ function pathTraversal(node, matrix, visited, peak) {
 
 function identifyPath(mountain) {
   // Find the peak
+  let peak = findPeak(mountain)
   // Find the start
+  let starts = findStarts(mountain)
+
+
   // Traverse from the starts and try to get to the top
+  for(const start of starts) {
+    if(pathTraversal(start, mountain, new Set(), peak)) {
+      return start
+    }
+  }
   // Your code here
 }
 
