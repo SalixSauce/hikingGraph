@@ -51,62 +51,85 @@ function findNeighbors(node, matrix) {
   // Your code here
   let [row, col] = node;
   let neighbors = [];
-  //north
-  if (row - 1 >= 0 && 
-    Math.abs(matrix[row - 1][col] - matrix[row][col]) <= 1) {
-    neighbors.push([row - 1, col]);
-  }
-  //South
-  if (row + 1 >= 0 && 
-    Math.abs(matrix[row + 1][col] - matrix[row][col]) <= 1) {
-    neighbors.push[(row + 1, col)];
-  }
-  //east
-  if (
-    col + 1 < matrix[row].length &&
-    Math.abs(matrix[row][col + 1] - matrix[row][col]) <= 1
-  ) {
-    neighbors.push([row, col + 1]);
-  }
+  let direction = [
+    [-1, 0], //top
+    [1, 0], // bottom
+    [0, -1], // left
+    [0, 1], // right
+    [-1, -1], //top left
+    [-1, 1], //top right
+    [1, 1], //bottom right
+    [1, -1] //bottom left
+  ]
 
-  //west
-  if (col - 1 >= 0 && 
-    Math.abs(matrix[row][col - 1] - matrix[row][col]) <= 1) {
-    neighbors.push([row, col - 1]);
-  }
+  for (const [rowChange, colChange] of direction) {
+    const newRow = row + rowChange;
+    const newCol = col + colChange;
 
-  //NorthEast
-  if (
-    row - 1 >= 0 &&
-    col + 1 < matrix[row - 1].length &&
-    Math.abs(matrix[row - 1][col + 1] - matrix[row][col]) <= 1
-  ) {
-    neighbors.push([row - 1, col + 1]);
+    if(
+      newRow >= 0 && newRow < matrix.length &&
+      newCol >=0 && newCol < matrix[newRow].length &&
+      Math.abs(matrix[newRow][newCol] - matrix[row][col]) <= 1
+    ) {
+      neighbors.push([newRow, newCol])
+    }
   }
-  //SouthEast
-  if (
-    row + 1 < matrix.length &&
-    col + 1 < matrix[row + 1].length &&
-    Math.abs(matrix[row + 1][col - 1] - matrix[row][col]) <= 1
-  ) {
-    neighbors.push([row + 1, col - 1]);
-  }
-  //NorthWest
-  if (
-    row - 1 >= 0 &&
-    col - 1 >= 0 &&
-    Math.abs(matrix[row + 1][col - 1] - matrix[row][col]) <= 1
-  ) {
-    neighbors.push([row + 1, col - 1]);
-  }
-  //SouthWest
-  if (
-    row + 1 < matrix.length &&
-    col - 1 >= 0 &&
-    Math.abs(matrix[row - 1][col - 1] - matrix[row][col]) <= 1
-  ) {
-    neighbors.push([row - 1, col - 1]);
-  }
+  // //north
+  // if (row - 1 >= 0 && 
+  //   Math.abs(matrix[row - 1][col] - matrix[row][col]) <= 1) {
+  //   neighbors.push([row - 1, col]);
+  // }
+  // //South
+  // if (row + 1 >= 0 && 
+  //   Math.abs(matrix[row + 1][col] - matrix[row][col]) <= 1) {
+  //   neighbors.push[(row + 1, col)];
+  // }
+  // //east
+  // if (
+  //   col + 1 < matrix[row].length &&
+  //   Math.abs(matrix[row][col + 1] - matrix[row][col]) <= 1
+  // ) {
+  //   neighbors.push([row, col + 1]);
+  // }
+
+  // //west
+  // if (col - 1 >= 0 && 
+  //   Math.abs(matrix[row][col - 1] - matrix[row][col]) <= 1) {
+  //   neighbors.push([row, col - 1]);
+  // }
+
+  // //NorthEast
+  // if (
+  //   row - 1 >= 0 &&
+  //   col + 1 < matrix[row - 1].length &&
+  //   Math.abs(matrix[row - 1][col + 1] - matrix[row][col]) <= 1
+  // ) {
+  //   neighbors.push([row - 1, col + 1]);
+  // }
+  // //SouthEast
+  // if (
+  //   row + 1 < matrix.length &&
+  //   col + 1 < matrix[row + 1].length &&
+  //   Math.abs(matrix[row + 1][col - 1] - matrix[row][col]) <= 1
+  // ) {
+  //   neighbors.push([row + 1, col - 1]);
+  // }
+  // //NorthWest
+  // if (
+  //   row - 1 >= 0 &&
+  //   col - 1 >= 0 &&
+  //   Math.abs(matrix[row + 1][col - 1] - matrix[row][col]) <= 1
+  // ) {
+  //   neighbors.push([row + 1, col - 1]);
+  // }
+  // //SouthWest
+  // if (
+  //   row + 1 < matrix.length &&
+  //   col - 1 >= 0 &&
+  //   Math.abs(matrix[row - 1][col - 1] - matrix[row][col]) <= 1
+  // ) {
+  //   neighbors.push([row - 1, col - 1]);
+  // }
   return neighbors
 }
 
